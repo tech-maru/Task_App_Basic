@@ -1,0 +1,19 @@
+<% provide(:title, 'Edit Task') %>
+<h1>new registration</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(model: @task, url: user_task_path(@user, @task), local: true,) do |f| %>
+       
+         <%= f.label :title, class: "label-control" %>
+         <%= f.text_field :title, value: @task.title, class: "form-control" %>
+         
+         <%= f.label :note, class: "lebel-control" %>
+         <%= f.text_field :note, value: @task.note, class: "form-control" %>
+         
+         <%= f.submit "update", class: "btn btn-primary btn-signup" %>
+          <botton class="btn btn-default btn-form"><%= link_to "cancel", user_tasks_path(@current_user) %></botton>
+    <% end %>
+   
+  </div>
+</div>

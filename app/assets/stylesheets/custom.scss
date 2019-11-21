@@ -50,6 +50,11 @@ p {
   line-height: 1.7em;
 }
 
+.link-btn > a {
+  color: white !important;
+  font-style: bold;
+}
+
 /* ヘッダー */
 
 .navbar {
@@ -71,11 +76,11 @@ p {
 #logo:hover {
   color: #777;
   text-decoration: none;
-}
+} 
 
 .navbar-nav > li > a {
-  color: white !important;
-  font-style: bold;
+ color: white !important;
+ font-style: bold;
 }
 
 .navbar-nav > li > a:hover {
@@ -110,3 +115,13 @@ p {
     color: $state-danger-text;
   }
 }
+
+/* タスク編集 */
+
+.btn-form {
+  margin-top: 10px;
+}
+
+
+
+

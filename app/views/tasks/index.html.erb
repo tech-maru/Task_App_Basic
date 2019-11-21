@@ -1,0 +1,29 @@
+<% provide(:title, @user.name) %>
+  <h1><%= @user.name %>のtasks_index</h1>
+  
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <botton class="btn btn-lg btn-primary pull-right link-btn"><%= link_to "タスク新規作成", new_user_task_path(@current_user) %></botton>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="">title</th>
+            <th class="">created_at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tasks.each do |task| %>
+            <tr>
+              <th><%= link_to "#{task.title}", user_task_path(@user, task.id) %></th>
+              <th><%= task.created_at %></th>
+              <th><botton class="btn btn-md btn-success link-btn"><%= link_to "edit", edit_user_task_path(@user, task.id) %></botton></th>
+              <th><botton class="btn btn-md btn-danger link-btn"><%= link_to "destroy", user_task_path(@user, task.id), method: :delete, data: { confirm: "#{task.title}を削除します。よろしいですか？" } %></botton></th>
+            </tr>
+           <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
