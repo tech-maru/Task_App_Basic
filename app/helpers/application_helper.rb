@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+  
   def full_title(page_name = "")
     base_title = "Sample"
     if page_name.empty?
@@ -8,4 +8,6 @@ module ApplicationHelper
       page_name + " | " + base_title
     end
   end
+  
+  
 end

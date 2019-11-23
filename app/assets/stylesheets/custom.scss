@@ -48,12 +48,19 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  text-align: center;
+}
+
+a {
+  color: #777;
 }
 
 .link-btn > a {
   color: white !important;
-  font-style: bold;
+  text-decoration: none;
 }
+
+
 
 /* ヘッダー */
 
@@ -80,11 +87,21 @@ p {
 
 .navbar-nav > li > a {
  color: white !important;
- font-style: bold;
+ font-weight: bold;
+ text-decoration: none;
 }
 
 .navbar-nav > li > a:hover {
-  color: #777 !important;
+  color: #c0c0c0 !important;;
+}
+
+.dropdown-header {
+  color: #777;
+  background-color: rgba(200,200,200,0.5); 
+}
+
+#dropdown-color {
+  background-color: teal;
 }
 
 /* デバッグウインドウ */
@@ -114,6 +131,59 @@ p {
   .form-control {
     color: $state-danger-text;
   }
+}
+
+/* TOP */
+
+.top-left {
+  text-align: center;
+  padding: 48px 60px;
+}
+
+.top-left p {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200;
+}
+
+#top-title {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 63px;
+}
+
+.guest-btn {
+  margin-top : 10px;
+}
+
+.top-right h2 {
+  margin-top: 20px;
+  font-size: 3em;
+  font-weight: 500;
+  color: #000;
+}
+
+/* 利用者一覧 */
+
+#destroy {
+  float: right;
+}
+
+
+/* タスク一覧 */
+
+#table-layout td {
+  vertical-align: middle;
+}
+
+#table-layout .link-btn {
+  margin: auto -6px;
+}
+
+#task-name {
+  font-size: 1.8rem;
 }
 
 /* タスク編集 */

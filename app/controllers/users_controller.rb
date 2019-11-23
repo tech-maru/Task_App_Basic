@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
+  before_action :set_user, only:[:show, :edit, :update, :destroy]
+  before_action :admin_user, only:[:index, :destroy]
+  
+  def index
+    @users = User.paginate(page: params[:page], per_page: 20).order(admin: :desc)
+  end
   
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -19,9 +24,44 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+  end
+  
+  def update
+    if @user.update(user_params)
+      flash[:success] = '更新しました。'
+      redirect_to user_url(@user)
+    else
+    render :edit
+    end
+  end
+  
+  def destroy
+    @user.destroy
+    flash[:success] = "#{@user.name}のデータを削除しました"
+    redirect_to users_path
+  end
+  
+  def guest_general
+    @current_useruser = User.find(3)
+    session[:user_id] = @current_user.id
+    redirect_to user_url(@user)
+  end
+    
+  def guest_admin
+    @current_user = User.find(2)
+    session[:user_id] = @current_user.id
+    redirect_to user_url(@current_user)
+  end
+  
   private
   
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+    
+    def set_user
+      @user = User.find(params[:id])
+    end
+    
 end

@@ -1,5 +1,5 @@
 <% provide(:title, @user.name) %>
-<h1>task詳細</h1>
+<h1>タスク詳細</h1>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -9,22 +9,22 @@
           <td><%= @task.id %></td>
         </tr>
         <tr>
-          <th class="active col-md-2">title</th>
+          <th class="active col-md-2">名称</th>
           <td><%= @task.title %></td>
         </tr>  
         <tr>
-          <th class="active col-md-2">note</th>
-          <td><%= @task.note %></td>
+          <th class="active col-md-2">詳細</th>
+          <td><%= text_url_to_link(@task.note) %></td>
         </tr>  
         <tr>
-          <th class="active col-md-2">created_at</th>
+          <th class="active col-md-2">作成日</th>
           <td><%= @task.created_at %></td>
         </tr>  
         <tr>
-          <th class="active col-md-2">updated_at</th>
+          <th class="active col-md-2">更新日</th>
           <td><%= @task.updated_at %></td>
         </tr> 
       </table>
       <botton class="btn btn-success link-btn"><%= link_to "edit", edit_user_task_path(@user, @task) %></botton>
-      <botton class="btn btn-danger link-btn"><%= link_to "delete", "#" %></botton>
+      <botton class="btn btn-danger link-btn"><%= link_to "delete", user_task_path(@user, @task), method: :delete, data: { confirm: "#{@task.title}を削除します。よろしいですか？"} %></botton>
   </div>

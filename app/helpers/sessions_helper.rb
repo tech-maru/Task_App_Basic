@@ -37,4 +37,17 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
+  
+  def admin_user
+    if current_user.admin?
+      @admin_user = @current_user
+    else
+      redirect_to root_url unless current_user.admin?
+    end
+  end
+  
+  def admin_users
+    @admin_users = User.where(admin: true)
+  end
+  
 end

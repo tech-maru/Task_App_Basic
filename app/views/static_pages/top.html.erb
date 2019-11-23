@@ -1,31 +1,52 @@
 <% provide(:title, "Top") %>
-<div class="jumbotron">
-  <h1>サンプルアプリ</h1>
-  <p>
-    皆さんの手で、この最低限の土台となるアプリケーションから<br>
-    タスク管理機能を持ったアプリケーションへと作り替えていきましょう！
-  </p>
 
-  <p>現在このアプリケーションには、以下の機能が備わっています。</p>
+  <div class="row">
+    
+    <div class="col-md-7 top-left">
+      <h1 id="top-title">TaskApp</h1>
+      <p>TaskAppは簡易ToDo管理ツールです。</p>
+      <p>↓↓初めてのご利用↓↓</p>
+      <botton class="btn btn-lg btn-success link-btn"><%= link_to "アカウント作成", signup_path %></botton>
+      <% if !logged_in? %>
+      <div>
+      <botton class="btn btn-md btn-danger link-btn guest-btn"><%= link_to "ゲストログイン(管理者権限)", guest_admin_path %></botton>
+      <botton class="btn btn-md btn-warning link-btn guest-btn"><%= link_to "ゲストログイン(一般権限)", guest_general_path %></botton>
+      </div>
+      <% end %>
+    </div>
+   
+    <div class= "col-md-4 top-right">
+       <h2>ログイン</h2>
+       <% if !logged_in? %>
+          <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+          
+            <%= f.label :email, "メールアドレス",class: "label-login" %>
+            <%= f.email_field :email, class: 'form-control' %>
+            
+            <%= f.label :password, "パスワード", class: "label-login" %>
+            <%= f.password_field :password, class: 'form-control' %>
+            
+             <%= f.submit "ログイン", class: "btn btn-primary btn-block btn-login" %>
+          <% end %>
+       <% else %>
+          <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+          
+            <%= f.label :email, "メールアドレス",class: "label-login" %>
+            <%= f.email_field :email, disabled: true, class: 'form-control' %>
+            
+            <%= f.label :password, "パスワード", class: "label-login" %>
+            <%= f.password_field :password, disabled: true, class: 'form-control' %>
+            
+            <button class="col-md-4 btn btn-primary btn-form btn-block disabled" %>ログイン状態です</button>
+          <% end %>
+       <% end %>
+    </div>
+ </div>
 
-  <ul>
-    <li>ルートURLに対応したトップページ（このページです）</li>
-    <li>ユーザー機能
-      <ol>
-        <li>名前・メールアドレス・パスワード・ログイン認証用のカラムを持ったUserモデル</li>
-        <li>ユーザー新規登録と対応したページ</li>
-      </ol>
-    </li>
-    <li>ログイン機能
-      <ol>
-        <li>セッションによる一時的ログイン機能</li>
-        <li>Cookiesによる永続的ログイン機能</li>
-      </ol>
-    </li>
-  </ul>
-  <p>実質【勤怠チュートリアル第７章】までの機能を持ったアプリケーションとなります。</p>
-  <center>
-    <%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
-    <%= link_to "Log In", login_path, class: "btn btn-lg btn-primary" %>
-  </center>
-</div>
+
+
+
+
+
+
+

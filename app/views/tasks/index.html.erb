@@ -1,23 +1,26 @@
 <% provide(:title, @user.name) %>
-  <h1><%= @user.name %>のtasks_index</h1>
+  <h1><%= @user.name %>のタスク一覧</h1>
   
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <botton class="btn btn-lg btn-primary pull-right link-btn"><%= link_to "タスク新規作成", new_user_task_path(@current_user) %></botton>
-      <table class="table table-hover">
+      <table class="table table-hover" id="table-layout">
         <thead>
           <tr>
-            <th class="">title</th>
-            <th class="">created_at</th>
+            <th><%= Task.human_attribute_name(:title) %></th>
+            <th><%= Task.human_attribute_name(:created_at) %></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @tasks.each do |task| %>
             <tr>
-              <th><%= link_to "#{task.title}", user_task_path(@user, task.id) %></th>
-              <th><%= task.created_at %></th>
-              <th><botton class="btn btn-md btn-success link-btn"><%= link_to "edit", edit_user_task_path(@user, task.id) %></botton></th>
-              <th><botton class="btn btn-md btn-danger link-btn"><%= link_to "destroy", user_task_path(@user, task.id), method: :delete, data: { confirm: "#{task.title}を削除します。よろしいですか？" } %></botton></th>
+              <td><%= link_to "#{task.title}", user_task_path(@user, task.id), id: "task-name" %></td>
+              <td><%= l(task.created_at, format: :long) %></td>
+              <td>
+                <botton class="btn btn-md btn-success link-btn"><%= link_to "編集", edit_user_task_path(@user, task.id) %></botton>
+              　<botton class="btn btn-md btn-danger link-btn"><%= link_to "削除", user_task_path(@user, task.id), method: :delete, data: { confirm: "#{task.title}を削除します。よろしいですか？" } %></botton>
+              </td>
             </tr>
            <% end %>
           </tbody>
