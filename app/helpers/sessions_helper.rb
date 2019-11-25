@@ -38,16 +38,27 @@ module SessionsHelper
     !current_user.nil?
   end
   
-  def admin_user
-    if current_user.admin?
-      @admin_user = @current_user
-    else
-      redirect_to root_url unless current_user.admin?
-    end
+  
+  def current_user?(user)
+    user == current_user
   end
   
-  def admin_users
-    @admin_users = User.where(admin: true)
-  end
+   def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください"
+        redirect_to login_url
+      end
+   end
+   
+   def correct_user
+     unless current_user?(@user)
+      flash[:danger] = "アクセス権限がありません"
+      redirect_to root_url
+     end
+   end
+    
+   def admin_user
+      redirect_to root_url unless @current_user.admin?
+   end
   
 end

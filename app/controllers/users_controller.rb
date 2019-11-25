@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only:[:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only:[:index, :show, :edit, :update, :destroy]
+  before_action :correct_user, only:[:show, :edit, :update]
   before_action :admin_user, only:[:index, :destroy]
   
   def index
@@ -43,15 +45,15 @@ class UsersController < ApplicationController
   end
   
   def guest_general
-    @current_useruser = User.find(3)
-    session[:user_id] = @current_user.id
+    @user = User.find(3)
+    log_in(@user) && current_user?(@user)
     redirect_to user_url(@user)
   end
     
   def guest_admin
-    @current_user = User.find(2)
-    session[:user_id] = @current_user.id
-    redirect_to user_url(@current_user)
+    @user = User.find(2)
+    log_in(@user)
+    redirect_to user_url(@user)
   end
   
   private
@@ -60,8 +62,17 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
     
+    # before_action
+    
     def set_user
       @user = User.find(params[:id])
+    end
+    
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください"
+        redirect_to login_url
+      end
     end
     
 end

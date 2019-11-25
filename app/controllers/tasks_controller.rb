@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
    before_action :current_user
    before_action :set_task, only:[:show, :edit, :update, :destroy]
+   before_action :logged_in_user
+   before_action :correct_tasks_user, only:[:index, :edit]
+ 
+   
 
   def index
     @user = User.find(params[:user_id])
@@ -57,5 +61,13 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
     
+    def correct_tasks_user
+      @user = User.find(params[:user_id])
+      unless  current_user?(@user) && @user
+        flash[:danger] = "アクセス権限がありません"
+        redirect_to root_url
+      end
+    end
     
+  
 end
